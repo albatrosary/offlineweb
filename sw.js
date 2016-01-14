@@ -1,6 +1,7 @@
 /* global fetch */
 /* global caches */
 var path = '/offlineweb/';
+var CACHE_NAME = 'offline_cache';
 
 this.addEventListener('install', function(event) {
   
@@ -10,7 +11,7 @@ this.addEventListener('install', function(event) {
     // 新しいキャッシュを生成する 
     // promiseが拒否された場合やインストールが失敗した場合、workerは何もしません。
     // コードを修正して再度登録にトライすればOKです。
-    caches.open('v1')
+    caches.open(CACHE_NAME)
       .then(function(cache) {
         
         // URL 配列を受け取り、それらを取得して指定された cache に結果のレスポンスオブジェクトを追加する。
@@ -35,7 +36,7 @@ this.addEventListener('fetch', function(event) {
   event.respondWith(
     caches.match(event.request).catch(function() {
       return fetch(event.request).then(function(response) {
-        return caches.open('v1').then(function(cache) {
+        return caches.open(CACHE_NAME).then(function(cache) {
           cache.put(event.request, response.clone());
           return response;
         });  
