@@ -20,4 +20,20 @@ if ('serviceWorker' in navigator) {
       // registration failed
       console.log('Registration failed with ' + error);
     });
+
+    navigator
+      .serviceWorker
+      .getRegistration()
+      .then(function(registration) {
+        console.log('registration');
+        return registration.update(); 
+      })
+      .then(function() {
+        // The script is updated, or there is no updated script.
+        console.log('The script is updated, or there is no updated script.');
+      })
+      .catch(function(e) {
+        // An error occurs during update (eg. Network error, Runtime error).
+        console.log('An error occurs during update (eg. Network error, Runtime error).');
+      });
 };
