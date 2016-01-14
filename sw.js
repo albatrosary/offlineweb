@@ -48,7 +48,7 @@ this.addEventListener('fetch', function(event) {
   // イベントリスナーをservice workerにアタッチしてから、
   // HTTPレスポンスをハイジャックしてマジックを使って更新するために、
   // イベント上でrespondWith() メソッドを呼び出せます。
-  event.respondWith(
+  event.respondWith (
     // 使用可能なキャッシュと一致する場合
     caches.match(event.request)
       .catch(function() {

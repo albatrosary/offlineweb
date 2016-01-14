@@ -7,7 +7,7 @@ if ('serviceWorker' in navigator) {
   // JavaScriptファイルをこのサイトのService Wokerとして登録
   navigator
     .serviceWorker
-    .register('/offlineweb/sw.js') // Promise
+    .register('/offlineweb/sw.js', {scope: '/offlineweb/'}) // Promise
     .then(function(reg) {
       if(reg.installing) {
         console.log('Service worker installing');
