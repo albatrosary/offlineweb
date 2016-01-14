@@ -30,14 +30,15 @@ this.addEventListener('install', function(event) {
 
 this.addEventListener('activate', function(event) {
   event.waitUntil(
-    caches.keys().then(function(keyList) {
+    caches.keys()
+    .then(function(keyList) {
       return Promise.all(keyList.map(function(key) {
         if (CACHE_NAME.indexOf(key) === -1) {
           return caches.delete(key);
         };
-      })
+      }));
     })
-  );
+  )
 });
 
 // fetch: Service Workersにキャッシュされたコンテンツに何かさせる
