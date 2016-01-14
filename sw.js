@@ -1,5 +1,3 @@
-/* global fetch */
-/* global caches */
 var CACHE_NAME = 'offline_cacheaaaa';
 var path = '/offlineweb/';
 var urlsToCache = [
