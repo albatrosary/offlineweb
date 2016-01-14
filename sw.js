@@ -1,7 +1,15 @@
 /* global fetch */
 /* global caches */
-var path = '/offlineweb/';
 var CACHE_NAME = 'offline_cache';
+var path = '/offlineweb/';
+var urlsToCache = [
+      path,
+      path+'index.html',
+      path+'style.css',
+      path+'app.js',
+      path+'image-list.js',
+      path+'star-wars-logo.jpg'
+    ];
 
 this.addEventListener('install', function(event) {
   
@@ -13,29 +21,17 @@ this.addEventListener('install', function(event) {
     // コードを修正して再度登録にトライすればOKです。
     caches.open(CACHE_NAME)
       .then(function(cache) {
-        
         // URL 配列を受け取り、それらを取得して指定された cache に結果のレスポンスオブジェクトを追加する。
-        // return cache.addAll([
-        //   path,
-        //   path+'index.html',
-        //   path+'style.css',
-        //   path+'app.js',
-        //   path+'image-list.js',
-        //   path+'star-wars-logo.jpg'
-        // ]);
-        return cache.addAll([
-          path,
-          path+'index.html',
-          path+'style.css',
-          path+'app.js',
-          path+'image-list.js',
-          path+'star-wars-logo.jpg'
-        ]);
+        console.log('Opened cache');
+        return cache.addAll(urlsToCache);
       })
   );
 });
 
 // fetch: Service Workersにキャッシュされたコンテンツに何かさせる
+// Service Worker がインストールされた状態で、
+// 他のページヘ移動したりページを更新したりすると、
+// Service Worker は fetch イベントを受け取ります。
 this.addEventListener('fetch', function(event) {
   console.log('Fetch Event Listener');
   // イベントリスナーをservice workerにアタッチしてから、
