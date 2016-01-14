@@ -55,6 +55,7 @@ this.addEventListener('fetch', function(event) {
         
         return fetch(event.request).then(function(response) {
           return caches.open(CACHE_NAME).then(function(cache) {
+            console.log('event.request', event.request);
             cache.put(event.request, response.clone());
             return response;
           });  
