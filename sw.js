@@ -1,4 +1,4 @@
-var CACHE_NAME = 'offline_cacheaaaa';
+var CACHE_NAME = 'offline_cache';
 var path = '/offlineweb/';
 var urlsToCache = [
       path,
