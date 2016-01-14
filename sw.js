@@ -3,25 +3,34 @@
 var path = '/offlineweb/';
 
 this.addEventListener('install', function(event) {
+  
+  console.log('Install Event Listener');
+  
   event.waitUntil(
-    caches.open('v1').then(function(cache) {
-      return cache.addAll([
-        path,
-        path+'index.html',
-        path+'style.css',
-        path+'app.js',
-        path+'image-list.js',
-        path+'star-wars-logo.jpg',
-        path+'gallery/',
-        path+'gallery/bountyHunters.jpg',
-        path+'gallery/myLittleVader.jpg',
-        path+'gallery/snowTroopers.jpg'
-      ]);
-    })
+    caches.open('v1')
+      .then(function(cache) {
+        console.log('caches.open');
+
+        return cache.addAll([
+          path,
+          path+'index.html',
+          path+'style.css',
+          path+'app.js',
+          path+'image-list.js',
+          path+'star-wars-logo.jpg',
+          path+'gallery/',
+          path+'gallery/bountyHunters.jpg',
+          path+'gallery/myLittleVader.jpg',
+          path+'gallery/snowTroopers.jpg'
+        ]);
+      })
   );
 });
 
 this.addEventListener('fetch', function(event) {
+  
+  console.log('Fetch Event Listener');
+  
   var response;
   event.respondWith(caches.match(event.request).catch(function() {
     return fetch(event.request);
