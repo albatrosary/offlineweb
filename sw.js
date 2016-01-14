@@ -7,7 +7,6 @@ var urlsToCache = [
       path+'index.html',
       path+'style.css',
       path+'app.js',
-      path+'image-list.js',
       path+'star-wars-logo.jpg'
     ];
 
@@ -38,7 +37,8 @@ this.addEventListener('fetch', function(event) {
   // HTTPレスポンスをハイジャックしてマジックを使って更新するために、
   // イベント上でrespondWith() メソッドを呼び出せます。
   event.respondWith(
-    caches.match(event.request).catch(function() {
+    caches.match(event.request)
+    .catch(function() {
       return fetch(event.request).then(function(response) {
         return caches.open(CACHE_NAME).then(function(cache) {
           cache.put(event.request, response.clone());
@@ -46,5 +46,6 @@ this.addEventListener('fetch', function(event) {
         });  
       });
     })
+    .
   );
 });
