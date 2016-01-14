@@ -15,7 +15,15 @@ this.addEventListener('install', function(event) {
       .then(function(cache) {
         
         // URL 配列を受け取り、それらを取得して指定された cache に結果のレスポンスオブジェクトを追加する。
-        return cache.addAll([
+        // return cache.addAll([
+        //   path,
+        //   path+'index.html',
+        //   path+'style.css',
+        //   path+'app.js',
+        //   path+'image-list.js',
+        //   path+'star-wars-logo.jpg'
+        // ]);
+        return cache.put([
           path,
           path+'index.html',
           path+'style.css',
