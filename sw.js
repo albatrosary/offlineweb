@@ -5,7 +5,6 @@ var path = '/offlineweb/';
 this.addEventListener('install', function(event) {
   
   console.log('Install Event Listener');
-  console.log('Install Event', event);
   
   event.waitUntil(
     caches.open('v1')
