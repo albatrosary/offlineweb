@@ -32,6 +32,9 @@ this.addEventListener('install', function(event) {
           path+'star-wars-logo.jpg'
         ]);
       })
+      .cache(function (e) {
+        console.log(e);
+      })
   );
 });
 
