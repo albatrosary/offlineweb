@@ -8,12 +8,13 @@ if ('serviceWorker' in navigator) {
   navigator
     .serviceWorker
     .register('/offlineweb/sw.js', {scope: '/offlineweb/'}) // Promise
-    .then(function(reg) {
-      if(reg.installing) {
+    .then(function(request) {
+      console.log(request);
+      if(request.installing) {
         console.log('Service worker installing');
-      } else if(reg.waiting) {
+      } else if(request.waiting) {
         console.log('Service worker installed');
-      } else if(reg.active) {
+      } else if(request.active) {
         console.log('Service worker active');
       }
     }).catch(function(error) {
