@@ -26,6 +26,7 @@ this.addEventListener('install', function(event) {
   );
 });
 
+// fetch: Service Workersにキャッシュされたコンテンツに何かさせる
 this.addEventListener('fetch', function(event) {
   console.log('Fetch Event Listener');
   // イベントリスナーをservice workerにアタッチしてから、
