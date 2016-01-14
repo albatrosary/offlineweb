@@ -23,7 +23,7 @@ this.addEventListener('install', function(event) {
         //   path+'image-list.js',
         //   path+'star-wars-logo.jpg'
         // ]);
-        return cache.put([
+        return cache.addAll([
           path,
           path+'index.html',
           path+'style.css',
@@ -31,9 +31,6 @@ this.addEventListener('install', function(event) {
           path+'image-list.js',
           path+'star-wars-logo.jpg'
         ]);
-      })
-      .cache(function (e) {
-        console.log(e);
       })
   );
 });
