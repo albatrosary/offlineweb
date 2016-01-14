@@ -4,7 +4,6 @@ var CACHE_NAME = 'offline_cacheaaaa';
 var path = '/offlineweb/';
 var urlsToCache = [
       path,
-      path+'index.html',
       path+'style.css',
       path+'app.js',
       path+'star-wars-logo.jpg'
