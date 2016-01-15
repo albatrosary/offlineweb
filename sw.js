@@ -52,7 +52,8 @@ this.addEventListener('fetch', function(event) {
   // イベントリスナーをservice workerにアタッチしてから、
   // HTTPレスポンスをハイジャックしてマジックを使って更新するために、
   // イベント上でrespondWith() メソッドを呼び出せます。
-  // event.respondWith (
+  var response;
+  event.respondWith (
   //   // 使用可能なキャッシュと一致する場合
   //   caches.match(event.request)
   //     .catch(function() {
@@ -70,5 +71,17 @@ this.addEventListener('fetch', function(event) {
   //       console.log('一致しないということかな');
   //       return caches.match('/sw-test/gallery/myLittleVader.jpg');
   //     })
-  // );
+    
+    caches.match(event.request).catch(function() {
+      return fetch(event.request);
+    }).then(function(r) {
+      response = r;
+      caches.open(CACHE_NAME).then(function(cache) {
+        cache.put(event.request, response);
+      });  
+      return response.clone();
+    }).catch(function() {
+      return caches.match('/sw-test/gallery/myLittleVader.jpg');
+    })
+  ); 
 });
