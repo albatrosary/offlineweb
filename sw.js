@@ -52,23 +52,23 @@ this.addEventListener('fetch', function(event) {
   // イベントリスナーをservice workerにアタッチしてから、
   // HTTPレスポンスをハイジャックしてマジックを使って更新するために、
   // イベント上でrespondWith() メソッドを呼び出せます。
-  event.respondWith (
-    // 使用可能なキャッシュと一致する場合
-    caches.match(event.request)
-      .catch(function() {
-        // console.log('使用可能なキャッシュと一致');
+  // event.respondWith (
+  //   // 使用可能なキャッシュと一致する場合
+  //   caches.match(event.request)
+  //     .catch(function() {
+  //       // console.log('使用可能なキャッシュと一致');
         
-        // return fetch(event.request).then(function(response) {
-        //   return caches.open(CACHE_NAME).then(function(cache) {
-        //     console.log('event.request', event.request);
-        //     cache.put(event.request, response.clone());
-        //     return response;
-        //   });  
-        // });
-      })
-      .catch(function() {
-        console.log('一致しないということかな');
-        return caches.match('/sw-test/gallery/myLittleVader.jpg');
-      })
-  );
+  //       // return fetch(event.request).then(function(response) {
+  //       //   return caches.open(CACHE_NAME).then(function(cache) {
+  //       //     console.log('event.request', event.request);
+  //       //     cache.put(event.request, response.clone());
+  //       //     return response;
+  //       //   });  
+  //       // });
+  //     })
+  //     .catch(function() {
+  //       console.log('一致しないということかな');
+  //       return caches.match('/sw-test/gallery/myLittleVader.jpg');
+  //     })
+  // );
 });
