@@ -26,6 +26,7 @@ if ('serviceWorker' in navigator) {
       .serviceWorker
       .getRegistration()
       .then(function(registration) {
+        // sw.js が更新されたとき registration.update() でService Workerを更新する
         console.log('registration');
         return registration.update(); 
       })
