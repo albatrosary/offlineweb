@@ -1,3 +1,6 @@
+/* var. 2016/1/15 11:04 */
+/* global fetch */
+/* global caches */
 var CACHE_NAME = 'offline_cache';
 var path = '/offlineweb/';
 var urlsToCache = [
