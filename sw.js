@@ -52,6 +52,7 @@ this.addEventListener('fetch', function(event) {
     // 使用可能なキャッシュと一致する場合
     caches.match(event.request)
       .catch(function() {
+        console.log('使用可能なキャッシュと一致');
         
         return fetch(event.request).then(function(response) {
           return caches.open(CACHE_NAME).then(function(cache) {
@@ -62,6 +63,7 @@ this.addEventListener('fetch', function(event) {
         });
       })
       .catch(function() {
+        console.log('一致しないということかな');
         return caches.match('/sw-test/gallery/myLittleVader.jpg');
       })
   );
