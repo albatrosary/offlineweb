@@ -2,14 +2,15 @@
 /* global fetch */
 /* global caches */
 var CACHE_NAME = 'offline_cache';
-var path = '/offlineweb/';
+var PATH = '/offlineweb/';
 var urlsToCache = [
-      path,
-      path+'index.html',
-      path+'style.css',
-      path+'app.js',
-      path+'star-wars-logo.jpg'
+      PATH,
+      PATH+'index.html',
+      PATH+'style.css',
+      PATH+'app.js',
+      PATH+'star-wars-logo.jpg'
     ];
+var OFFLINE_URL = PATH + 'offline.html';
 
 this.addEventListener('install', function(event) {
   
@@ -27,7 +28,6 @@ this.addEventListener('install', function(event) {
       })
   );
 });
-
 
 this.addEventListener('activate', function(event) {
   event.waitUntil(
@@ -52,37 +52,25 @@ this.addEventListener('fetch', function(event) {
   // イベントリスナーをservice workerにアタッチしてから、
   // HTTPレスポンスをハイジャックしてマジックを使って更新するために、
   // イベント上でrespondWith() メソッドを呼び出せます。
-  var response;
   event.respondWith (
-  //   // 使用可能なキャッシュと一致する場合
-  //   caches.match(event.request)
-  //     .catch(function() {
-  //       // console.log('使用可能なキャッシュと一致');
-        
-  //       // return fetch(event.request).then(function(response) {
-  //       //   return caches.open(CACHE_NAME).then(function(cache) {
-  //       //     console.log('event.request', event.request);
-  //       //     cache.put(event.request, response.clone());
-  //       //     return response;
-  //       //   });  
-  //       // });
-  //     })
-  //     .catch(function() {
-  //       console.log('一致しないということかな');
-  //       return caches.match('/sw-test/gallery/myLittleVader.jpg');
-  //     })
     
+    // 使用可能なキャッシュと一致する場合
     caches.match(event.request)
       .catch(function() {
-        return fetch(event.request);
-      }).then(function(r) {
-        response = r;
-        caches.open(CACHE_NAME).then(function(cache) {
-          cache.put(event.request, response);
-        });  
-        return response.clone();
-      }).catch(function() {
-        return caches.match('/sw-test/gallery/myLittleVader.jpg');
-      })
+        console.log('使用可能なキャッシュと一致');
+        
+        return fetch(event)
+                .then(function(response) {
+                  return caches.open(CACHE_NAME).then(function(cache) {
+                    console.log('event.request', event.request);
+                    cache.put(event.request, response.clone());
+                    return response;
+                  });  
+                })
+                .catch(function(error){
+                  console.log('Fetch failed; returning offline page instead.', error);
+                  return caches.match(OFFLINE_URL);
+                })
+              })
   ); 
 });
